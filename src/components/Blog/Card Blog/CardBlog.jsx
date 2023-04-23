@@ -1,13 +1,26 @@
-// Icon
-import { FiArrowUpRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
+// Utilities
+import { Parser } from "html-to-react";
+
+// Style
 import "./CardBlog.scss";
 
-const CardBlog = () => {
+// Icon
+import { FiArrowUpRight } from "react-icons/fi";
+import { useEffect, useRef } from "react";
+
+const CardBlog = ({ item }) => {
+  const { id, title, body, maker, image } = item;
+  const cardDesriptionRef = useRef();
+
+  useEffect(() => {
+    cardDesriptionRef.current.innerHTML = body.slice(0, 120) + "...";
+  }, []);
   return (
     <li className="card-blog">
       <div className="card-blog-cover">
-        <img src="https://api.smkkgb2.sch.id/images/1673310511.jpg" alt="" />
+        <img src={image} alt="" />
       </div>
       <div className="card-blog-body">
         <div className="card-author">
@@ -19,7 +32,7 @@ const CardBlog = () => {
             />
             <div className="card-author-detail">
               <p>Post By</p>
-              <h3>Muhammad Raihan</h3>
+              <h3>{maker}</h3>
             </div>
           </div>
           <a className="circle-arrow" href="">
@@ -27,12 +40,11 @@ const CardBlog = () => {
           </a>
         </div>
 
-        <a className="card-title" href="">
-          Training dan Sertifikasi Siswa TKJ Kelas MTCNA..
-        </a>
-        <p className="card-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-          ratione....
+        <Link className="card-title" to={`/artikel/${id}`}>
+          {title}
+        </Link>
+        <p className="card-description" ref={cardDesriptionRef}>
+          {" "}
         </p>
 
         <div className="card-info">

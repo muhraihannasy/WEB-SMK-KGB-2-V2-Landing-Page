@@ -1,12 +1,12 @@
 import "./Blog.scss";
 import CardBlog from "./Card Blog/CardBlog";
 
-const Blog = () => {
+const Blog = ({ items }) => {
   return (
     <ul className="list-blogs">
-      <CardBlog />
-      <CardBlog />
-      <CardBlog />
+      {items.map((item, i) => (
+        <CardBlog key={i} item={item} />
+      ))}
     </ul>
   );
 };

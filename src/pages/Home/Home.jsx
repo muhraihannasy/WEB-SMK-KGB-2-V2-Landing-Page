@@ -1,3 +1,9 @@
+import { useEffect, useState } from "react";
+
+// Config
+import { APIBASEURL } from "../../config/config";
+
+// Style
 import "./Home.scss";
 
 // Icon
@@ -26,6 +32,17 @@ import Footer from "../../components/Footer/Footer";
 import Button from "../../components/Button/Button";
 
 const Home = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${APIBASEURL}/blogs`);
+      const data = await response.json();
+      setArticles(data);
+    };
+    (async () => fetchData())();
+  }, []);
+
   return (
     <>
       <Header />
@@ -208,7 +225,7 @@ const Home = () => {
           <div className="row">
             <h2 className="subheading">Artikel & Berita</h2>
             <h3 className="heading">Baca Artikel & Berita Terbaru</h3>
-            <Blog />
+            <Blog items={articles} />
           </div>
         </div>
       </section>

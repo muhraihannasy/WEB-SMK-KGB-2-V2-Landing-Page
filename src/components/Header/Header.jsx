@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// Style
+import "./Header.scss";
+
+// Component
+import Dropdown from "../Dropdown/Dropdown";
+import Button from "../Button/Button";
+
 // Icon
 import { VscListSelection } from "react-icons/vsc";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsTelephonePlus } from "react-icons/bs";
 import { TfiEmail } from "react-icons/tfi";
 
-import "./Header.scss";
-
 // Image
 import Logo from "/assets/image/logo.png";
-import Dropdown from "../Dropdown/Dropdown";
-import Button from "../Button/Button";
 
 const listDropdown = [
   {
@@ -124,7 +127,7 @@ const Header = () => {
               <Link to="http://ppdb.smkkgb2.sch.id/">PPDB</Link>
             </li>
             <li className="nav-item">
-              <Link to="/">Artikel</Link>
+              <Link to="/artikel">Artikel</Link>
             </li>
             <li className="nav-item">
               <Dropdown
