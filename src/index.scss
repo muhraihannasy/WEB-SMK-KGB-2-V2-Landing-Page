@@ -1,0 +1,62 @@
+@import "./assets/utils/_color.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  overflow-x: hidden;
+  // height: 1000rem;
+}
+
+p {
+  font-size: 0.9em;
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Utilities Class */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5em;
+}
+
+.description-grey {
+  color: $thirdColor;
+}
+
+.subheading {
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.heading {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0.4em 0;
+}
+
+@media (min-width: 1000px) {
+  .subheading {
+    font-size: 1.1em;
+  }
+
+  .heading {
+    font-size: 2em;
+  }
+}

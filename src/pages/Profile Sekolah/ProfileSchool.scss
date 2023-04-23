@@ -1,0 +1,35 @@
+@import "../../assets/utils/color";
+
+section.profile-about {
+  .container {
+    padding-top: 4em;
+  }
+  .right p {
+    margin-top: 1em;
+  }
+}
+
+section.our-team {
+  margin-top: 2em;
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    // gap: 1em;
+  }
+}
+
+@media (min-width: 1000px) {
+  section.profile-about {
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      place-items: center;
+      gap: 4em;
+    }
+
+    .left {
+      margin-top: 1.2em;
+    }
+  }
+}

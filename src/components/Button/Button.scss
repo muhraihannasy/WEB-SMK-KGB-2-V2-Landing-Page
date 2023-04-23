@@ -1,0 +1,20 @@
+@import "../../assets/utils/color";
+
+.btn-link {
+  padding: 0.6em 1em;
+  border-radius: 0.5em;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.btn.primary,
+.btn-link.primary {
+  background-color: $primaryColor;
+  color: $white;
+}
+
+.btn.secondary,
+.btn-link.secondary {
+  background-color: $secondaryColor;
+  color: $white;
+}

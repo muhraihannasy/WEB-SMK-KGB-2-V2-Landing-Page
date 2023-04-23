@@ -1,0 +1,59 @@
+@import "../../assets/utils/color";
+
+.accordion-item {
+  padding: 1em 0 1em 70px;
+  border-bottom: 1px solid rgb(231, 228, 228);
+  transition: all 0.5s ease-in;
+}
+
+.accordion-toggle {
+  position: relative;
+  cursor: pointer;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    left: -4.5em;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background-color: orange;
+  }
+
+  .accordion-title {
+    font-size: 1em;
+    font-weight: 600;
+    padding: 1em;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    transition: all 0.5s ease;
+
+    &.active {
+      transition: all 0.5s ease;
+      background-color: rgb(246, 246, 246);
+    }
+  }
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 0 0 15px;
+  font-size: 0.9em;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+  transition: background-color 0.5s ease;
+
+  &.show {
+    background-color: rgb(246, 246, 246);
+
+    transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+    padding: 0 0 20px 15px;
+    height: auto;
+    max-height: 9999px;
+  }
+}

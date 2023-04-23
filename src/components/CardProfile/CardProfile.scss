@@ -1,0 +1,28 @@
+.card-profile {
+  width: 20em;
+  text-align: center;
+  background-color: aqua;
+
+  .card-cover {
+    // width: minmax(200px, 1fr);
+    // height: 15em;
+    margin-bottom: 1em;
+    overflow: hidden;
+  }
+
+  .card-cover img {
+    width: 100%;
+    border-radius: 1em;
+  }
+
+  .name {
+    font-size: 1.2em;
+    font-weight: 600;
+  }
+
+  .division {
+    font-size: 0.9em;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
