@@ -53,7 +53,7 @@ const Home = () => {
       IoIosPeople,
       TfiBlackboard,
       SiGoogleclassroom,
-      FaBookReader
+      FaBookReader,
     };
     return iconMap[iconName] || null;
   };
@@ -63,7 +63,7 @@ const Home = () => {
     const iconMap = {
       computer,
       accounting,
-      company
+      company,
     };
     return iconMap[iconName] || null;
   };
@@ -78,12 +78,11 @@ const Home = () => {
             <div className="left">
               <h2 className="subheading">{hero.subheading}</h2>
               <h1 className="heading">
-                <span className="primary">{hero.heading.part1}</span> {hero.heading.part2}{" "}
+                <span className="primary">{hero.heading.part1}</span>{" "}
+                {hero.heading.part2}{" "}
                 <span className="secondary">{hero.heading.part3}</span>
               </h1>
-              <p style={{ marginBottom: "3em" }}>
-                {hero.description}
-              </p>
+              <p style={{ marginBottom: "3em" }}>{hero.description}</p>
 
               <a
                 className="btn-link secondary"
@@ -109,6 +108,16 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="blog">
+        <div className="container">
+          <div className="row">
+            <h2 className="subheading">{blog.subheading}</h2>
+            <h3 className="heading">{blog.heading}</h3>
+            <Blog items={articles} />
+          </div>
+        </div>
+      </section>
+
       <section className="why">
         <div className="container">
           <div className="row">
@@ -120,15 +129,9 @@ const Home = () => {
               }}
             ></div>
             <div className="right">
-              <h2 className="subheading">
-                {why.subheading}
-              </h2>
-              <h3 className="heading">
-                {why.heading}
-              </h3>
-              <p className="description-grey">
-                {why.description}
-              </p>
+              <h2 className="subheading">{why.subheading}</h2>
+              <h3 className="heading">{why.heading}</h3>
+              <p className="description-grey">{why.description}</p>
 
               <ul className="list-excess">
                 {why.benefits.map((benefit, index) => (
@@ -147,9 +150,7 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <h2 className="subheading">{competencies.subheading}</h2>
-            <h3 className="heading">
-              {competencies.heading}
-            </h3>
+            <h3 className="heading">{competencies.heading}</h3>
 
             <ul className="list-competens">
               {competencies.items.map((item, index) => (
@@ -159,9 +160,7 @@ const Home = () => {
                   </div>
                   <div className="body">
                     <h3 className="competen-title">{item.title}</h3>
-                    <p className="competen-description">
-                      {item.description}
-                    </p>
+                    <p className="competen-description">{item.description}</p>
                     <a href="" className="circle-arrow">
                       <BsArrowUpRight />
                     </a>
@@ -183,23 +182,11 @@ const Home = () => {
                   <li key={index} className="list-info-item">
                     {IconComponent && <IconComponent className="icon" />}
                     <h2 className="info-number">{item.number}</h2>
-                    <p className="info-description">
-                      {item.description}
-                    </p>
+                    <p className="info-description">{item.description}</p>
                   </li>
                 );
               })}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="blog">
-        <div className="container">
-          <div className="row">
-            <h2 className="subheading">{blog.subheading}</h2>
-            <h3 className="heading">{blog.heading}</h3>
-            <Blog items={articles} />
           </div>
         </div>
       </section>
@@ -222,17 +209,9 @@ const Home = () => {
       <section className="banner">
         <div className="container">
           <div className="banner-info">
-            <h2 className="heading">
-              {banner.heading}
-            </h2>
-            <p className="description">
-              {banner.description}
-            </p>
-            <Button
-              type="link"
-              bg="secondary"
-              to={banner.ctaLink}
-            >
+            <h2 className="heading">{banner.heading}</h2>
+            <p className="description">{banner.description}</p>
+            <Button type="link" bg="secondary" to={banner.ctaLink}>
               {banner.ctaText}
             </Button>
           </div>

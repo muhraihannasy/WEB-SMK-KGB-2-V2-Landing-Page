@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -6,7 +5,7 @@ import HeroBanner from "../../components/Hero Banner/HeroBanner";
 import { mikrotikContent } from "./content";
 import { AiFillCheckCircle } from "react-icons/ai";
 // import headmasterImage from "/assets/image/headmaster.jpg"; // You'll need to add this image
-// import mikrotikLogo from "/assets/image/mikrotik-logo.png"; // You'll need to add this image
+import mikrotikGroup from "/assets/image/mikrotik-group.png"; // You'll need to add this image
 
 // Style
 import "./Mikrotik.scss";
@@ -22,7 +21,10 @@ const Mikrotik = () => {
     <>
       <Header />
 
-      <HeroBanner title={heroBanner.title} currentPage={heroBanner.currentPage} />
+      <HeroBanner
+        title={heroBanner.title}
+        currentPage={heroBanner.currentPage}
+      />
 
       <section className="mikrotik-headmaster">
         <div className="container">
@@ -45,14 +47,16 @@ const Mikrotik = () => {
         <div className="container">
           <div className="row">
             <div className="left">
-              <div className="mikrotik-logo">
-                {/* <img src={mikrotikLogo} alt="Mikrotik Academy Logo" /> */}
-              </div>
+              <img
+                src={mikrotikGroup}
+                alt="Mikrotik Academy Logo"
+                className="responsive-image"
+              />
             </div>
             <div className="right">
               <h2 className="subheading">{about.subheading}</h2>
               <h3 className="heading">{about.heading}</h3>
-              
+
               {about.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
@@ -68,7 +72,7 @@ const Mikrotik = () => {
               <h2 className="subheading">{benefits.subheading}</h2>
               <h3 className="heading">{benefits.heading}</h3>
             </div>
-            
+
             <ul className="benefits-list">
               {benefits.items.map((benefit, index) => (
                 <li key={index} className="benefit-item">

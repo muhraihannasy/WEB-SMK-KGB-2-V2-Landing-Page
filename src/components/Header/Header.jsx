@@ -10,65 +10,24 @@ import Button from "../Button/Button";
 
 // Icon
 import { VscListSelection } from "react-icons/vsc";
-import { IoIosArrowDown } from "react-icons/io";
 import { BsTelephonePlus } from "react-icons/bs";
 import { TfiEmail } from "react-icons/tfi";
 
 // Image
 import Logo from "/assets/image/logo.png";
 
-const listDropdown = [
-  {
-    id: 1,
-    title: "Jurusan",
-    subnav: [
-      {
-        title: "Teknik Komputer & Jaringan",
-        to: "/",
-      },
-      {
-        title: "Akutansi & Keuangan Lembaga",
-        to: "/",
-      },
-      {
-        title: "Otomatisasi & Tata Kelola Perkantoran",
-        to: "/",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "BKK",
-    subnav: [
-      {
-        title: "Lowongan Pekerjaan",
-        to: "/",
-      },
-      {
-        title: "Mitra Industri",
-        to: "/",
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Lainnya",
-    subnav: [
-      {
-        title: "Foto LDKS",
-        to: "/",
-      },
-      {
-        title: "Hubungi Kami",
-        to: "/",
-      },
-    ],
-  },
-];
+// Content
+import { headerContent } from "./content";
 
 const Header = () => {
   const [isOpenNav, setIsOpenNav] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Map icon names to actual components
+  const iconComponents = {
+    BsTelephonePlus: BsTelephonePlus,
+    TfiEmail: TfiEmail,
+  };
 
   function handleScroll(e) {
     const pageYOffset = window.pageYOffset;
@@ -77,15 +36,18 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-  }, [scrollPosition]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <header>
       <div className="row">
         <div className={scrollPosition >= 102 ? "header sticky" : "header"}>
           <a href="" className="nav-logo">
-            <img src={Logo} alt="Logo SMK Karya Guna Bhakti 2 Kota Bekasi" />
-            <h2 className="title">SMK Karya Guna Bhakti 2 Bekasi</h2>
+            <img src={Logo} alt={headerContent.logo.alt} />
+            <h2 className="title">{headerContent.logo.title}</h2>
           </a>
           <div className="btn-open-nav" onClick={() => setIsOpenNav(true)}>
             <VscListSelection />
@@ -93,24 +55,20 @@ const Header = () => {
         </div>
 
         <ul className="list-informs">
-          <li className="list-inform-item">
-            <div className="icon">
-              <BsTelephonePlus />
-            </div>
-            <div className="info-detail">
-              <h2 className="title">Hotline</h2>
-              <p className="description">+62 824 2384 23</p>
-            </div>
-          </li>
-          <li className="list-inform-item">
-            <div className="icon">
-              <TfiEmail />
-            </div>
-            <div className="info-detail">
-              <h2 className="title">Email</h2>
-              <p className="description">informasi@smkkgb2.sch.id</p>
-            </div>
-          </li>
+          {headerContent.contactInfo.map((item, index) => {
+            const IconComponent = iconComponents[item.icon];
+            return (
+              <li className="list-inform-item" key={index}>
+                <div className="icon">
+                  <IconComponent />
+                </div>
+                <div className="info-detail">
+                  <h2 className="title">{item.title}</h2>
+                  <p className="description">{item.description}</p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -119,63 +77,27 @@ const Header = () => {
           scrollPosition >= 102 ? " row sticky wrapper-nav" : "row wrapper-nav"
         }
       >
-        <nav className={isOpenNav && "show"}>
+        <nav className={isOpenNav ? "show" : ""}>
           <ul className="nav-items">
-            <li className="nav-item">
-              <Link to="/">Beranda</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/profile-sekolah">Profile Sekolah</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="http://ppdb.smkkgb2.sch.id/">PPDB</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/artikel">Artikel</Link>
-            </li>
-            <li className="nav-item">
-              <Dropdown
-                title={listDropdown[0].title}
-                subnav={listDropdown[0].subnav}
-              />
-            </li>
-            <li className="nav-item">
-              <Dropdown
-                title={listDropdown[1].title}
-                subnav={listDropdown[1].subnav}
-              />
-            </li>
-            <li className="nav-item">
-              <Dropdown
-                title={listDropdown[2].title}
-                subnav={listDropdown[2].subnav}
-              />
-            </li>
-            <li className="nav-item">
-              <Link to="/mikrotik-academny">Mikrotik Academny</Link>
-            </li>
+            {headerContent.navigation.map((item, index) => (
+              <li className="nav-item" key={index}>
+                {item.type === "link" ? (
+                  <Link to={item.to}>{item.title}</Link>
+                ) : (
+                  <Dropdown title={item.title} subnav={item.subnav} />
+                )}
+              </li>
+            ))}
           </ul>
 
           <ul className="wrapper-buttons">
-            <li>
-              <Button
-                type="link"
-                bg="secondary2"
-                to="http://ppdb.smkkgb2.sch.id/register"
-              >
-                Login
-              </Button>
-            </li>
-
-            <li>
-              <Button
-                type="link"
-                bg="outline-secondary"
-                to="http://ppdb.smkkgb2.sch.id/register"
-              >
-                Daftar Sekarang
-              </Button>
-            </li>
+            {headerContent.buttons.map((button, index) => (
+              <li key={index}>
+                <Button type={button.type} bg={button.bg} to={button.to}>
+                  {button.title}
+                </Button>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

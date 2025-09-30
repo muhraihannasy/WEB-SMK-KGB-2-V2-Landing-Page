@@ -6,6 +6,7 @@ import ProfileSchool from "./pages/Profile Sekolah/ProfileSchool";
 import DetailBlog from "./components/Blog/Detail Blog/DetailBlog";
 import Artikel from "./pages/Artikel/Artikel";
 import Mikrotik from "./pages/Mikrotik/Mikrotik";
+import MitraIndustri from "./pages/Mitra Industri/MitraIndustri";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ function App() {
     {
       path: "/mikrotik-academny",
       element: <Mikrotik />,
+    },
+    {
+      path: "/mitra-industri",
+      element: <MitraIndustri />,
     },
   ]);
   return <RouterProvider router={router} />;

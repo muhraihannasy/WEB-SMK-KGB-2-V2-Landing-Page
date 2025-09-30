@@ -1,4 +1,3 @@
-
 @import "../../assets/utils/color";
 
 // Mikrotik Headmaster Section
@@ -128,6 +127,18 @@
         color: #555;
         margin-bottom: 1.5rem;
       }
+    }
+  }
+
+  .responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (min-width: 1000px) {
+    .responsive-image {
+      max-width: 680px; // Maximum width on larger screens
     }
   }
 }
