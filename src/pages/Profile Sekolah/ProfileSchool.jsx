@@ -2,61 +2,60 @@ import CardProfile from "../../components/CardProfile/CardProfile";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import HeroBanner from "../../components/Hero Banner/HeroBanner";
+import { profileContent } from "./content";
 import "./ProfileSchool.scss";
 
 const ProfileSchool = () => {
+  const { heroBanner, about, ourTeam, vision, facilities, achievements } = profileContent;
+
   return (
     <>
       <Header />
 
-      <HeroBanner title="Profile Sekolah" currentPage="/profile-sekolah" />
+      <HeroBanner title={heroBanner.title} currentPage={heroBanner.currentPage} />
 
       <section className="profile-about">
         <div className="container">
           <div className="row">
             <div className="left">
-              <h2 className="subheading">Tentang SMK KGB 2</h2>
-              <h3 className="heading">
-                Manfaat Bergabung Dengan SMK Karya Guna Bhakti 2
-              </h3>
+              <h2 className="subheading">{about.subheading}</h2>
+              <h3 className="heading">{about.heading}</h3>
             </div>
             <div className="right">
-              <p>
-                SMK Karya Guna Bhakti 2 adalah sekolah menengah kejuruan yang
-                berada di Kota Bekasi, dengan kurikulum yang terus dikembangkan
-                dan disesuaikan dengan kebutuhan dunia industri yang semakin
-                berkembang.
-              </p>
-              <p>
-                Kami hadir dengan misi untuk menghasilkan lulusan yang
-                berkualitas dan siap menghadapi tantangan dunia kerja. Di SMK
-                Karya Guna Bhakti 2, kami menyediakan berbagai program keahlian
-                seperti Teknik Komputer dan Jaringan, Tata Kelola Perkantoran
-                dan Akuntansi.
-              </p>
+              {about.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* <section className="our-team">
+      <section className="vision-mission">
         <div className="container">
           <div className="row">
-            <CardProfile
-              name="Yuli Veli Susanti"
-              division="Kepala Sekolah SMK Karya Guna Bhakti 2"
-            />
-            <CardProfile
-              name="Yuli Veli Susanti"
-              division="Kepala Sekolah SMK Karya Guna Bhakti 2"
-            />
-            <CardProfile
-              name="Yuli Veli Susanti"
-              division="Kepala Sekolah SMK Karya Guna Bhakti 2"
-            />
+            <div className="section-header">
+              <h2 className="subheading">{vision.subheading}</h2>
+              <h3 className="heading">{vision.heading}</h3>
+            </div>
+            
+            <div className="vision-mission-content">
+              <div className="vision-box">
+                <h4>Visi</h4>
+                <p>{vision.vision}</p>
+              </div>
+              
+              <div className="mission-box">
+                <h4>Misi</h4>
+                <ul className="mission-list">
+                  {vision.missions.map((mission, index) => (
+                    <li key={index}>{mission}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       <Footer />
     </>

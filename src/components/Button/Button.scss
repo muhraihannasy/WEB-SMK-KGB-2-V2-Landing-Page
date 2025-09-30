@@ -1,7 +1,7 @@
 @import "../../assets/utils/color";
 
 .btn-link {
-  padding: 0.6em 1em;
+  padding: 0.8em 1.5em;
   border-radius: 0.5em;
   font-size: 0.9em;
   font-weight: 500;
@@ -17,4 +17,17 @@
 .btn-link.secondary {
   background-color: $secondaryColor;
   color: $white;
+}
+
+.btn.secondary2,
+.btn-link.secondary2 {
+  background-color: $secondaryColor;
+  color: black;
+}
+
+.btn.outline-secondary,
+.btn-link.outline-secondary {
+  background-color: transparent;
+  border: 2px solid $secondaryColor;
+  color: black;
 }

@@ -114,7 +114,11 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className={scrollPosition >= 102 ? "row sticky" : "row"}>
+      <div
+        className={
+          scrollPosition >= 102 ? " row sticky wrapper-nav" : "row wrapper-nav"
+        }
+      >
         <nav className={isOpenNav && "show"}>
           <ul className="nav-items">
             <li className="nav-item">
@@ -146,6 +150,31 @@ const Header = () => {
                 title={listDropdown[2].title}
                 subnav={listDropdown[2].subnav}
               />
+            </li>
+            <li className="nav-item">
+              <Link to="/mikrotik-academny">Mikrotik Academny</Link>
+            </li>
+          </ul>
+
+          <ul className="wrapper-buttons">
+            <li>
+              <Button
+                type="link"
+                bg="secondary2"
+                to="http://ppdb.smkkgb2.sch.id/register"
+              >
+                Login
+              </Button>
+            </li>
+
+            <li>
+              <Button
+                type="link"
+                bg="outline-secondary"
+                to="http://ppdb.smkkgb2.sch.id/register"
+              >
+                Daftar Sekarang
+              </Button>
             </li>
           </ul>
         </nav>

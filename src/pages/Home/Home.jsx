@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 // Config
 import { APIBASEURL } from "../../config/config";
 
+// Content
+import { homeContent } from "./content";
+
 // Style
 import "./Home.scss";
 
@@ -33,6 +36,7 @@ import Button from "../../components/Button/Button";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
+  const { hero, why, competencies, infoMore, blog, faq, banner } = homeContent;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +47,27 @@ const Home = () => {
     (async () => fetchData())();
   }, []);
 
+  // Map icon names to actual components
+  const getIconComponent = (iconName) => {
+    const iconMap = {
+      IoIosPeople,
+      TfiBlackboard,
+      SiGoogleclassroom,
+      FaBookReader
+    };
+    return iconMap[iconName] || null;
+  };
+
+  // Map competency icons to image sources
+  const getCompetencyIcon = (iconName) => {
+    const iconMap = {
+      computer,
+      accounting,
+      company
+    };
+    return iconMap[iconName] || null;
+  };
+
   return (
     <>
       <Header />
@@ -51,16 +76,22 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="left">
-              <h2 className="subheading">SMK Karya Guna Bhaki 2 Kota Bekasi</h2>
+              <h2 className="subheading">{hero.subheading}</h2>
               <h1 className="heading">
-                <span className="primary">Best</span> Vocational High School{" "}
-                <span className="secondary">in Bekasi</span>
+                <span className="primary">{hero.heading.part1}</span> {hero.heading.part2}{" "}
+                <span className="secondary">{hero.heading.part3}</span>
               </h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequatur nostrum iusto assumenda voluptatem totam neque
-                molestiae tenetur! Harum, eius numquam?
+              <p style={{ marginBottom: "3em" }}>
+                {hero.description}
               </p>
+
+              <a
+                className="btn-link secondary"
+                href={hero.ctaLink}
+                target="_blank"
+              >
+                {hero.ctaText}
+              </a>
             </div>
 
             <div className="right">
@@ -69,9 +100,9 @@ const Home = () => {
                 height="315"
                 src="https://www.youtube.com/embed/-2m9beYGnpA?autoplay=1&mute=1"
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </div>
           </div>
@@ -90,35 +121,22 @@ const Home = () => {
             ></div>
             <div className="right">
               <h2 className="subheading">
-                Kenapa harus SMK Karya Guna Bhakti 2 Kota Bekasi?
+                {why.subheading}
               </h2>
               <h3 className="heading">
-                Manfaat Bergabung Dengan SMK Karya Guna Bhakti 2
+                {why.heading}
               </h3>
               <p className="description-grey">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Aliquam iste laboriosam voluptatem maiores ex ut corporis velit
-                iure? Quibusdam, omnis est. Nam similique odit, quam officia
-                pariatur ex beatae eligendi!
+                {why.description}
               </p>
 
               <ul className="list-excess">
-                <li className="list-excess-item">
-                  <AiFillCheckCircle />
-                  Ter-Akreditasi A
-                </li>
-                <li className="list-excess-item">
-                  <AiFillCheckCircle />
-                  Sarana Praktik Lengkap
-                </li>
-                <li className="list-excess-item">
-                  <AiFillCheckCircle />
-                  10+ Mitra Industri
-                </li>
-                <li className="list-excess-item">
-                  <AiFillCheckCircle />
-                  Guru Yang Terampil dan Profesional
-                </li>
+                {why.benefits.map((benefit, index) => (
+                  <li key={index} className="list-excess-item">
+                    <AiFillCheckCircle />
+                    {benefit}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -128,58 +146,28 @@ const Home = () => {
       <section className="competen">
         <div className="container">
           <div className="row">
-            <h2 className="subheading">Kompetensi</h2>
+            <h2 className="subheading">{competencies.subheading}</h2>
             <h3 className="heading">
-              Kompetensi yang tersedia di SMK Karya Guna Bhakti 2
+              {competencies.heading}
             </h3>
 
             <ul className="list-competens">
-              <li className="list-competen-item">
-                <div className="icon">
-                  <img src={computer} alt="" />
-                </div>
-                <div className="body">
-                  <h3 className="competen-title">Teknik Komputer & Jaringan</h3>
-                  <p className="competen-description">
-                    Bidang Keahlian Teknik Informatika
-                  </p>
-                  <a href="" className="circle-arrow">
-                    <BsArrowUpRight />
-                  </a>
-                </div>
-              </li>
-              <li className="list-competen-item">
-                <div className="icon">
-                  <img src={accounting} alt="" />
-                </div>
-                <div className="body">
-                  <h3 className="competen-title">
-                    Akuntansi & Keuangan Lembaga
-                  </h3>
-                  <p className="competen-description">
-                    Bidang Keahlian Bisnis dan Manajemen
-                  </p>
-                  <a href="" className="circle-arrow">
-                    <BsArrowUpRight />
-                  </a>
-                </div>
-              </li>
-              <li className="list-competen-item">
-                <div className="icon">
-                  <img src={company} alt="" />
-                </div>
-                <div className="body">
-                  <h3 className="competen-title">
-                    Otomatisasi & Tata Kelola Perkatoran
-                  </h3>
-                  <p className="competen-description">
-                    Bidang Keahlian Bisnis dan Manajemen
-                  </p>
-                  <a href="" className="circle-arrow">
-                    <BsArrowUpRight />
-                  </a>
-                </div>
-              </li>
+              {competencies.items.map((item, index) => (
+                <li key={index} className="list-competen-item">
+                  <div className="icon">
+                    <img src={getCompetencyIcon(item.icon)} alt="" />
+                  </div>
+                  <div className="body">
+                    <h3 className="competen-title">{item.title}</h3>
+                    <p className="competen-description">
+                      {item.description}
+                    </p>
+                    <a href="" className="circle-arrow">
+                      <BsArrowUpRight />
+                    </a>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -189,32 +177,18 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <ul className="list-infos">
-              <li className="list-info-item">
-                <IoIosPeople className="icon" />
-                <h2 className="info-number">1500</h2>
-                <p className="info-description">
-                  Siswa Karya Guna Bhakti 2 Bekasi
-                </p>
-              </li>
-              <li className="list-info-item">
-                <TfiBlackboard className="icon" />
-                <h2 className="info-number">3</h2>
-                <p className="info-description">Kejuruan</p>
-              </li>
-              <li className="list-info-item">
-                <SiGoogleclassroom className="icon" />
-
-                <h2 className="info-number">30+</h2>
-                <p className="info-description">Ruang Kelas</p>
-              </li>
-              <li className="list-info-item">
-                <FaBookReader className="icon" />
-
-                <h2 className="info-number">60+</h2>
-                <p className="info-description">
-                  Guru Berkompetensi Pada Tiap Bidangnya
-                </p>
-              </li>
+              {infoMore.items.map((item, index) => {
+                const IconComponent = getIconComponent(item.icon);
+                return (
+                  <li key={index} className="list-info-item">
+                    {IconComponent && <IconComponent className="icon" />}
+                    <h2 className="info-number">{item.number}</h2>
+                    <p className="info-description">
+                      {item.description}
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -223,8 +197,8 @@ const Home = () => {
       <section className="blog">
         <div className="container">
           <div className="row">
-            <h2 className="subheading">Artikel & Berita</h2>
-            <h3 className="heading">Baca Artikel & Berita Terbaru</h3>
+            <h2 className="subheading">{blog.subheading}</h2>
+            <h3 className="heading">{blog.heading}</h3>
             <Blog items={articles} />
           </div>
         </div>
@@ -234,15 +208,12 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="left">
-              <h2 className="subheading">FAQ</h2>
-              <h3 className="heading">Pertanyaan yang Sering Diajukan</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Assumenda, aliquid! Nihil, porro, corporis provident expedita
-              </p>
+              <h2 className="subheading">{faq.subheading}</h2>
+              <h3 className="heading">{faq.heading}</h3>
+              <p>{faq.description}</p>
             </div>
             <div className="right">
-              <Faq />
+              <Faq items={homeContent.faq.items} />
             </div>
           </div>
         </div>
@@ -252,20 +223,17 @@ const Home = () => {
         <div className="container">
           <div className="banner-info">
             <h2 className="heading">
-              Ayo, Daftar dari Sekarang. Untuk Masa Depan yang Lebih Baik.
+              {banner.heading}
             </h2>
             <p className="description">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rerum
-              pariatur culpa laborum nesciunt soluta eveniet similique quo.
-              Fugiat quaerat quos dolor quae repellat, minima animi fuga ipsum
-              maxime ratione aspernatur.
+              {banner.description}
             </p>
             <Button
               type="link"
               bg="secondary"
-              to="http://ppdb.smkkgb2.sch.id/register"
+              to={banner.ctaLink}
             >
-              Daftar Sekarang
+              {banner.ctaText}
             </Button>
           </div>
 

@@ -1,35 +1,151 @@
-@import "../../assets/utils/color";
+@import "../../assets/utils/_color.scss";
 
-section.profile-about {
-  .container {
-    padding-top: 4em;
-  }
-  .right p {
-    margin-top: 1em;
-  }
-}
-
-section.our-team {
-  margin-top: 2em;
+// Profile About Section
+.profile-about {
+  padding: 5em 0;
 
   .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    // gap: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    .left {
+      .heading {
+        margin-top: 0.5em;
+      }
+    }
+
+    .right {
+      p {
+        margin-bottom: 1.5em;
+        line-height: 1.7;
+        color: #555;
+             font-size: 1.1em;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 }
 
-@media (min-width: 1000px) {
-  section.profile-about {
-    .row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      place-items: center;
-      gap: 4em;
+// Vision Mission Section
+.vision-mission {
+  padding: 2em 0;
+  background-color: #f8f9fa;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3em;
+
+    .heading {
+      margin-top: 0.5em;
+    }
+  }
+
+  .vision-mission-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+
+    .vision-box,
+    .mission-box {
+      background-color: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+      h4 {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: $primaryColor;
+        margin-bottom: 1em;
+        position: relative;
+        padding-bottom: 0.5em;
+
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 50px;
+          height: 3px;
+          background-color: $secondaryColor;
+        }
+      }
     }
 
-    .left {
-      margin-top: 1.2em;
+    .vision-box {
+      p {
+        line-height: 1.7;
+        font-style: italic;
+        color: #555;
+        font-size: 1.2em;
+      }
+    }
+
+    .mission-box {
+      .mission-list {
+        list-style: none;
+        padding: 0;
+
+        li {
+          position: relative;
+          padding-left: 1.5em;
+          margin-bottom: 1em;
+          line-height: 1.7;
+          color: #555;
+          font-size: 1.1em;
+
+          &:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: $secondaryColor;
+            font-size: 1.2em;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive styles
+@media (min-width: 1000px) {
+  .profile-about {
+    .row {
+      flex-direction: row;
+      gap: 5em;
+
+      .left {
+        flex: 1;
+      }
+
+      .right {
+        flex: 2;
+      }
+    }
+  }
+
+  .vision-mission {
+    .vision-mission-content {
+      flex-direction: row;
+      gap: 2em;
+
+      .vision-box,
+      .mission-box {
+        flex: 1;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+      }
     }
   }
 }
