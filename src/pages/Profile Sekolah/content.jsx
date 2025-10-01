@@ -1,4 +1,3 @@
-
 export const profileContent = {
   heroBanner: {
     title: "Profile Sekolah",

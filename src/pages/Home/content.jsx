@@ -1,4 +1,3 @@
-
 export const homeContent = {
   hero: {
     subheading: "SMK Karya Guna Bhaki 2 Kota Bekasi",

@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import HeroBanner from "../../components/Hero Banner/HeroBanner";
+import { APIBASEURL2 } from "../../config/config";
 import { mikrotikContent } from "./content";
 import { AiFillCheckCircle } from "react-icons/ai";
 // import headmasterImage from "/assets/image/headmaster.jpg"; // You'll need to add this image
@@ -12,9 +13,21 @@ import "./Mikrotik.scss";
 
 const Mikrotik = () => {
   const { heroBanner, headmaster, about, benefits } = mikrotikContent;
+  const [content, setContent] = useState({});
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const fetchContent = async () => {
+      try {
+        const response = await fetch(`${APIBASEURL2}/cms/mikrotik-content`);
+        const data = await response.json();
+        setContent(data?.data || {});
+      } catch (error) {
+        console.error("Error fetching content:", error);
+        setContent({});
+      }
+    };
+
+    (async () => fetchContent())();
   }, []);
 
   return (
@@ -22,22 +35,30 @@ const Mikrotik = () => {
       <Header />
 
       <HeroBanner
-        title={heroBanner.title}
-        currentPage={heroBanner.currentPage}
+        title={content?.hero_title || heroBanner.title}
+        currentPage={content?.hero_current_page || heroBanner.currentPage}
       />
 
       <section className="mikrotik-headmaster">
         <div className="container">
           <div className="row">
             <div className="left">
-              <h2 className="subheading">{headmaster.subheading}</h2>
-              <h3 className="heading">{headmaster.heading}</h3>
-              <h4 className="name">{headmaster.name}</h4>
+              <h2 className="subheading">
+                {content?.headmaster_subheading || headmaster.subheading}
+              </h2>
+              <h3 className="heading">
+                {content?.headmaster_heading || headmaster.heading}
+              </h3>
+              <h4 className="name">
+                {content?.headmaster_name || headmaster.name}
+              </h4>
             </div>
             <div className="right">
-              {headmaster.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+              {(content?.headmaster_paragraphs || headmaster.paragraphs).map(
+                (paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -54,12 +75,18 @@ const Mikrotik = () => {
               />
             </div>
             <div className="right">
-              <h2 className="subheading">{about.subheading}</h2>
-              <h3 className="heading">{about.heading}</h3>
+              <h2 className="subheading">
+                {content?.about_subheading || about.subheading}
+              </h2>
+              <h3 className="heading">
+                {content?.about_heading || about.heading}
+              </h3>
 
-              {about.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+              {(content?.about_paragraphs || about.paragraphs).map(
+                (paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -69,17 +96,23 @@ const Mikrotik = () => {
         <div className="container">
           <div className="row">
             <div className="section-header">
-              <h2 className="subheading">{benefits.subheading}</h2>
-              <h3 className="heading">{benefits.heading}</h3>
+              <h2 className="subheading">
+                {content?.benefits_subheading || benefits.subheading}
+              </h2>
+              <h3 className="heading">
+                {content?.benefits_heading || benefits.heading}
+              </h3>
             </div>
 
             <ul className="benefits-list">
-              {benefits.items.map((benefit, index) => (
-                <li key={index} className="benefit-item">
-                  <AiFillCheckCircle className="check-icon" />
-                  <span>{benefit}</span>
-                </li>
-              ))}
+              {(content?.benefits_items || benefits.items).map(
+                (benefit, index) => (
+                  <li key={index} className="benefit-item">
+                    <AiFillCheckCircle className="check-icon" />
+                    <span>{benefit}</span>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

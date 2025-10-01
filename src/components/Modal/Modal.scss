@@ -1,0 +1,104 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background: url("../../../public/assets/image/bg-popup.jfif");
+  background-size: cover;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: -1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(3, 14, 63, 0.8);
+    border-radius: 16px;
+    z-index: -1;
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.modal-content {
+  margin-top: 10px;
+}
+
+// Specific styles for the PPDB modal
+.ppdb-modal {
+  text-align: center;
+
+  h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .highlight {
+    color: #f39c12;
+    font-weight: bold;
+  }
+
+  .jurusan-list {
+    text-align: left;
+    margin: 15px 0;
+
+    .jurusan-item {
+      margin: 8px 0;
+    }
+  }
+
+  .contact-info {
+    margin: 15px 0;
+
+    .phone-numbers {
+      margin: 10px 0;
+
+      .phone-number {
+        display: block;
+        margin: 5px 0;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .cta-button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+
+    &:hover {
+      background-color: darken(#f39c12, 10%);
+    }
+  }
+}
