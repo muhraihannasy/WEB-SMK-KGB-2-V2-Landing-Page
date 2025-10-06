@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { BsArrowLeft } from "react-icons/bs";
 
 // Config
 import { APIBASEURL2 } from "../../../config/config";
@@ -22,6 +23,7 @@ const DetailBlog = () => {
   });
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Reset scroll position to top-left when visiting or changing article ID
@@ -43,39 +45,51 @@ const DetailBlog = () => {
     };
     (async () => fetchData())();
   }, []);
+
+  const normalizeUrl = (url) => (url || "").replace(/[`]/g, "").trim();
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    try {
+      return new Date(dateStr).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } catch (_) {
+      return dateStr;
+    }
+  };
   return (
     <>
       <Header />
 
-      <section className="detail-blog">
+      <section className="detail-blog cms-detail">
         <div className="container">
           <div className="row">
             <div className="left">
-              <div className="info-blog">
-                <div className="info-profile-user">
-                  <img
-                    src="https://images.unsplash.com/photo-1682070545191-57347361ab03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="info-detail">
-                  <h2 className="info-user-name">Artikel</h2>
-                  <p>
-                    Dibuat{" "}
-                    {article?.created_at
-                      ? new Date(article.created_at).getFullYear()
-                      : ""}
+              <div className="blog-content">
+                <div className="content-header">
+                  <button
+                    type="button"
+                    className="back-button"
+                    onClick={() => navigate(-1)}
+                    aria-label="Kembali"
+                  >
+                    <BsArrowLeft />
+                    Kembali
+                  </button>
+                  <p className="meta-date">
+                    Dibuat {formatDate(article.created_at)}
                   </p>
                 </div>
-              </div>
-
-              <div className="blog-content">
                 <h2 className="blog-title">{article.title}</h2>
-                <img
-                  src={(article.cover || "").replace(/`/g, "").trim()}
-                  alt=""
-                  className="image-content"
-                />
+                {article.cover && (
+                  <img
+                    src={normalizeUrl(article.cover)}
+                    alt=""
+                    className="image-content"
+                  />
+                )}
                 <div
                   className="blog-html"
                   dangerouslySetInnerHTML={{ __html: article?.content || "" }}
