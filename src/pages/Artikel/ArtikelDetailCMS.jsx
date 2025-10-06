@@ -15,6 +15,15 @@ const ArtikelDetailCMS = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Reset scroll position to top-left when visiting or changing article ID
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } catch (_) {
+      window.scrollTo(0, 0);
+    }
+  }, [id]);
+
+  useEffect(() => {
     const fetchArticle = async () => {
       try {
         const res = await fetch(`${APIBASEURL2}/cms/articles/${id}`);
