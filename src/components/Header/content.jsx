@@ -77,7 +77,7 @@ export const headerContent = {
       subnav: [
         {
           title: "OSIS SMK KGB 2 Kota Bekasi",
-          to: "/",
+          to: "https://osis.smkkgb2.sch.id",
         },
         {
           title: "Foto LDKS",
@@ -91,7 +91,7 @@ export const headerContent = {
     },
     {
       title: "Mikrotik Academny",
-      to: "/mikrotik-academny",
+      to: "https://mikrotik-academny.smkkgb2.sch.id",
       type: "link",
     },
   ],

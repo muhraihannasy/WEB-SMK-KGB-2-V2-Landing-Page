@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // Config
-import { APIBASEURL } from "../../config/config";
+import { APIBASEURL2 } from "../../config/config";
 
 // Style
 import "./Artikel.scss";
@@ -13,6 +13,10 @@ import Footer from "../../components/Footer/Footer";
 
 const Artikel = () => {
   const [articles, setArticles] = useState([]);
+  const [loadingArticles, setLoadingArticles] = useState(true);
+  const [showMore, setShowMore] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loadingShowMore, setLoadingShowMore] = useState(false);
 
   useEffect(() => {
     // Reset scroll position to top-left when visiting or changing article ID
@@ -25,12 +29,31 @@ const Artikel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${APIBASEURL}/blogs`);
-      const data = await response.json();
-      setArticles(data);
+      try {
+        const response = await fetch(
+          `${APIBASEURL2}/cms/articles/list?limit=6&page=${currentPage}`
+        );
+        const data = await response.json();
+        const articles = data?.data?.data;
+
+        if (data?.data?.last_page === data?.data?.current_page) {
+          setShowMore(false);
+        } else {
+          setShowMore(true);
+        }
+
+        setArticles((prevArticles) => [...prevArticles, ...articles]);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+        setArticles([]);
+      } finally {
+        setLoadingArticles(false);
+      }
     };
+
     (async () => fetchData())();
-  }, []);
+  }, [currentPage]);
+
   return (
     <>
       <Header />
@@ -38,7 +61,21 @@ const Artikel = () => {
       <section className="artikel">
         <div className="container">
           <h2 className="heading">Artikel</h2>
-          <Blog items={articles} />
+          <Blog items={articles} loading={loadingArticles} />
+
+          <div className="wrapper-btn-show-more">
+            {showMore && (
+              <button
+                className="btn-link secondary"
+                onClick={() => {
+                  setLoadingShowMore(true);
+                  setCurrentPage((prevPage) => prevPage + 1);
+                }}
+              >
+                {loadingShowMore ? "Loading..." : "Lihat lebih banyak"}
+              </button>
+            )}
+          </div>
         </div>
       </section>
 

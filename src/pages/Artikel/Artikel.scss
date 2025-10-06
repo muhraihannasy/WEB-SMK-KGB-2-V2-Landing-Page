@@ -4,4 +4,16 @@ section.artikel {
     text-align: center;
     margin-bottom: 1.7em;
   }
+
+  .wrapper-btn-show-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+  }
+
+  .btn-link.secondary {
+    border: none;
+    cursor: pointer;
+    margin: 1em auto;
+  }
 }

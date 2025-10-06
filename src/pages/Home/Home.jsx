@@ -37,6 +37,7 @@ import PPDBModal from "../../components/Modal/PPDBModal";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
+  const [loadingArticles, setLoadingArticles] = useState(true);
   const [showModal, setShowModal] = useState(true);
   const [content, setContent] = useState({});
 
@@ -73,6 +74,8 @@ const Home = () => {
       } catch (error) {
         console.error("Error fetching articles:", error);
         setArticles([]);
+      } finally {
+        setLoadingArticles(false);
       }
     };
 
@@ -169,7 +172,7 @@ const Home = () => {
           <div className="row">
             <h2 className="subheading">{content?.blog_subheading || ""}</h2>
             <h3 className="heading">{content?.blog_heading || ""}</h3>
-            <Blog items={articles} />
+            <Blog items={articles} loading={loadingArticles} />
             <div
               style={{
                 marginTop: "1.5em",

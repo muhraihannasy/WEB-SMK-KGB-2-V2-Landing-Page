@@ -123,4 +123,34 @@
   &:hover .card-blog-body .circle {
     background-color: $secondaryColor;
   }
+
+  &.skeleton {
+    cursor: default;
+
+    .card-blog-cover.skeleton-rect {
+      width: 100%;
+      height: 18em;
+      border-radius: 0;
+      background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+      background-size: 400% 100%;
+      animation: loadingShimmer 1.4s ease infinite;
+    }
+
+    .skeleton-line {
+      height: 0.9em;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+      background-size: 400% 100%;
+      animation: loadingShimmer 1.4s ease infinite;
+    }
+  }
+
+  @keyframes loadingShimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
 }

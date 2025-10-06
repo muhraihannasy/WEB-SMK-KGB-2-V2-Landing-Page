@@ -21,6 +21,7 @@ const DetailBlog = () => {
     category: {},
     created_at: "",
   });
+  const [loading, setLoading] = useState(true);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -36,12 +37,16 @@ const DetailBlog = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${APIBASEURL2}/cms/articles/${id}`);
-
-      const data = await response.json();
-      const article = data?.data;
-
-      setArticle(article);
+      try {
+        const response = await fetch(`${APIBASEURL2}/cms/articles/${id}`);
+        const data = await response.json();
+        const article = data?.data;
+        setArticle(article || {});
+      } catch (_) {
+        setArticle({});
+      } finally {
+        setLoading(false);
+      }
     };
     (async () => fetchData())();
   }, []);
@@ -65,38 +70,80 @@ const DetailBlog = () => {
 
       <section className="detail-blog cms-detail">
         <div className="container">
-          <div className="row">
-            <div className="left">
-              <div className="blog-content">
-                <div className="content-header">
-                  <button
-                    type="button"
-                    className="back-button"
-                    onClick={() => navigate(-1)}
-                    aria-label="Kembali"
-                  >
-                    <BsArrowLeft />
-                    Kembali
-                  </button>
-                  <p className="meta-date">
-                    Dibuat {formatDate(article.created_at)}
-                  </p>
+          {loading ? (
+            <div className="row">
+              <div className="left">
+                <div className="blog-content skeleton">
+                  <div className="content-header">
+                    <button
+                      type="button"
+                      className="back-button"
+                      onClick={() => navigate(-1)}
+                      aria-label="Kembali"
+                    >
+                      <BsArrowLeft />
+                      Kembali
+                    </button>
+                    <div
+                      className="skeleton-line"
+                      style={{ width: "180px" }}
+                    ></div>
+                  </div>
+                  <div
+                    className="skeleton-line"
+                    style={{ width: "70%", height: "1.6em" }}
+                  ></div>
+                  <div
+                    className="skeleton-rect"
+                    style={{
+                      height: "220px",
+                      borderRadius: "10px",
+                      margin: "1em 0",
+                    }}
+                  ></div>
+                  <div className="skeleton-line" style={{ width: "95%" }}></div>
+                  <div className="skeleton-line" style={{ width: "90%" }}></div>
+                  <div className="skeleton-line" style={{ width: "85%" }}></div>
+                  <div className="skeleton-line" style={{ width: "95%" }}></div>
+                  <div className="skeleton-line" style={{ width: "90%" }}></div>
+                  <div className="skeleton-line" style={{ width: "85%" }}></div>
                 </div>
-                <h2 className="blog-title">{article.title}</h2>
-                {article.cover && (
-                  <img
-                    src={normalizeUrl(article.cover)}
-                    alt=""
-                    className="image-content"
-                  />
-                )}
-                <div
-                  className="blog-html"
-                  dangerouslySetInnerHTML={{ __html: article?.content || "" }}
-                ></div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="row">
+              <div className="left">
+                <div className="blog-content">
+                  <div className="content-header">
+                    <button
+                      type="button"
+                      className="back-button"
+                      onClick={() => navigate(-1)}
+                      aria-label="Kembali"
+                    >
+                      <BsArrowLeft />
+                      Kembali
+                    </button>
+                    <p className="meta-date">
+                      Dibuat {formatDate(article.created_at)}
+                    </p>
+                  </div>
+                  <h2 className="blog-title">{article.title}</h2>
+                  {article.cover && (
+                    <img
+                      src={normalizeUrl(article.cover)}
+                      alt=""
+                      className="image-content"
+                    />
+                  )}
+                  <div
+                    className="blog-html"
+                    dangerouslySetInnerHTML={{ __html: article?.content || "" }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
