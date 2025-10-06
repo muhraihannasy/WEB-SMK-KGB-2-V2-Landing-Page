@@ -87,7 +87,7 @@ export const headerContent = {
     },
     {
       title: "Mikrotik Academny",
-      to: "/",
+      to: "https://mikrotik-academny.smkkgb2.sch.id",
       type: "link",
     },
   ],

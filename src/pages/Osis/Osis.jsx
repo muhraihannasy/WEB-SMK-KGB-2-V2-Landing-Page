@@ -10,9 +10,9 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import mikrotikGroup from "/assets/image/mikrotik-group.png"; // You'll need to add this image
 
 // Style
-import "./Mikrotik.scss";
+import "./Osis.scss";
 
-const Mikrotik = () => {
+const Osis = () => {
   const { heroBanner, headmaster, about, benefits } = mikrotikContent;
   const [content, setContent] = useState({});
   const [articles, setArticles] = useState([]);
@@ -29,7 +29,7 @@ const Mikrotik = () => {
     const fetchArticles = async () => {
       try {
         const response = await fetch(
-          `${APIBASEURL2}/cms/articles/list?category_name=mikrotik&page=${currentPage}&limit=6`
+          `${APIBASEURL2}/cms/articles/list?category_name=osis&page=${currentPage}&limit=6`
         );
         const data = await response.json();
         const articles = data?.data?.data;
@@ -72,90 +72,14 @@ const Mikrotik = () => {
     <>
       <Header />
 
-      <HeroBanner
-        title={content?.hero_title || heroBanner.title}
-        currentPage={content?.hero_current_page || heroBanner.currentPage}
-      />
-
-      <section className="mikrotik-headmaster">
+      <section className="mikrotik-benefits" style={{}}>
         <div className="container">
           <div className="row">
-            <div className="left">
-              <h2 className="subheading">
-                {content?.headmaster_subheading || headmaster.subheading}
-              </h2>
-              <h3 className="heading">
-                {content?.headmaster_heading || headmaster.heading}
-              </h3>
-              <h4 className="name">
-                {content?.headmaster_name || headmaster.name}
-              </h4>
-            </div>
-            <div className="right">
-              {(content?.headmaster_paragraphs || headmaster.paragraphs).map(
-                (paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mikrotik-about">
-        <div className="container">
-          <div className="row">
-            <div className="left">
-              <img
-                src={mikrotikGroup}
-                alt="Mikrotik Academy Logo"
-                className="responsive-image"
-              />
-            </div>
-            <div className="right">
-              <h2 className="subheading">
-                {content?.about_subheading || about.subheading}
-              </h2>
-              <h3 className="heading">
-                {content?.about_heading || about.heading}
-              </h3>
-
-              {(content?.about_paragraphs || about.paragraphs).map(
-                (paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mikrotik-benefits">
-        <div className="container">
-          <div className="row">
-            <div className="section-header">
-              <h2 className="subheading">
-                {content?.benefits_subheading || benefits.subheading}
-              </h2>
-              <h3 className="heading">
-                {content?.benefits_heading || benefits.heading}
-              </h3>
-            </div>
-
-            <ul className="benefits-list">
-              {(content?.benefits_items || benefits.items).map(
-                (benefit, index) => (
-                  <li key={index} className="benefit-item">
-                    <AiFillCheckCircle className="check-icon" />
-                    <span>{benefit}</span>
-                  </li>
-                )
-              )}
-            </ul>
-
             <div className="mikrotik-articles">
               <div className="section-header">
-                <h3 className="heading">Artikel Mikrotik</h3>
+                <h3 className="heading">
+                  OSIS SMK Karya Guna Bhakti 2 Kota Bekasi
+                </h3>
               </div>
 
               {articlesLoading ? (
@@ -257,4 +181,4 @@ const Mikrotik = () => {
   );
 };
 
-export default Mikrotik;
+export default Osis;

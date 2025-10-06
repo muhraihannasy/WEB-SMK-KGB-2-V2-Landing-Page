@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Pages
-import ArtikelDetailCMS from "./pages/Mikrotik/ArtikelDetailCMS";
-import Mikrotik from "./pages/Mikrotik/Mikrotik";
+import ArtikelDetailCMS from "./pages/Osis/ArtikelDetailCMS";
+import Mikrotik from "./pages/Osis/Osis";
 
 function App() {
   const router = createBrowserRouter([
