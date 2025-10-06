@@ -11,6 +11,7 @@ import mikrotikGroup from "/assets/image/mikrotik-group.png"; // You'll need to 
 
 // Style
 import "./Mikrotik.scss";
+import Blog from "../../components/Blog/Blog";
 
 const Mikrotik = () => {
   const { heroBanner, headmaster, about, benefits } = mikrotikContent;
@@ -158,95 +159,7 @@ const Mikrotik = () => {
                 <h3 className="heading">Artikel Mikrotik</h3>
               </div>
 
-              {articlesLoading ? (
-                <ul className="articles-grid skeleton">
-                  {Array.from({ length: 6 }).map((_, idx) => (
-                    <li key={idx} className="article-card">
-                      <div className="cover">
-                        <div
-                          className="skeleton-rect"
-                          style={{ height: "180px" }}
-                        ></div>
-                      </div>
-                      <div className="body">
-                        <div
-                          className="skeleton-line"
-                          style={{ width: "80%", height: "1.2em" }}
-                        ></div>
-                        <div
-                          className="skeleton-line"
-                          style={{ width: "95%" }}
-                        ></div>
-                        <div
-                          className="skeleton-line"
-                          style={{ width: "90%" }}
-                        ></div>
-                        <div
-                          className="skeleton-line"
-                          style={{ width: "60%" }}
-                        ></div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              ) : Array.isArray(articles) && articles.length > 0 ? (
-                <>
-                  <ul className="articles-grid">
-                    {articles.map((item) => (
-                      <li key={item.id} className="article-card">
-                        <Link
-                          className="card-link"
-                          to={`/artikel-cms/${item.id}`}
-                        >
-                          <div className="cover">
-                            <img src={item.cover} alt={item.title} />
-                          </div>
-                          <div className="body">
-                            <h4 className="title">
-                              {truncate(item.title, 100)}
-                            </h4>
-                            <p className="excerpt">{item.excerpt}</p>
-                            {item.created_at && (
-                              <p className="meta">
-                                {new Date(item.created_at).toLocaleDateString(
-                                  "id-ID",
-                                  {
-                                    day: "numeric",
-                                    month: "long",
-                                    year: "numeric",
-                                  }
-                                )}
-                              </p>
-                            )}
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  {isShowMore && (
-                    <div className="show-more-wrapper">
-                      <button
-                        type="button"
-                        className="show-more"
-                        onClick={() => {
-                          setLoadingShowMore(true);
-                          setCurrentPage((c) => c + 1);
-                        }}
-                      >
-                        {loadingShowMore ? (
-                          <div className="loading-spinner">
-                            <p>Loading...</p>
-                          </div>
-                        ) : (
-                          "Tampilkan Lebih Banyak"
-                        )}
-                      </button>
-                    </div>
-                  )}
-                </>
-              ) : (
-                <p className="empty">Belum ada artikel.</p>
-              )}
+              <Blog items={articles} loading={articlesLoading} />
             </div>
           </div>
         </div>
