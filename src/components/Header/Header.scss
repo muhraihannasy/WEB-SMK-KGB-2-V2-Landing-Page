@@ -62,8 +62,7 @@ header {
       right: 0em;
     }
 
-    
-  .wrapper-buttons {
+    .wrapper-buttons {
       display: flex;
       align-items: center;
       gap: 1em;
@@ -190,11 +189,30 @@ header {
 @media (max-width: 1000px) {
   header {
     height: 6.5em;
+
+    nav {
+      width: min(85vw, 400px);
+      right: -100%;
+      overflow-y: auto;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+
+      .nav-items {
+        margin-top: 1em;
+      }
+
+      .wrapper-buttons {
+        display: flex;
+        gap: 1em;
+        margin-top: auto;
+        padding-top: 1em;
+        border-top: 1px solid #eee;
+      }
+    }
   }
 
-  .wrapper-buttons {
-    display: none;
-  }
+  // Buttons remain visible; placed at bottom of the mobile nav.
 
   .header {
     transition: 0.3s ease-in;
@@ -211,9 +229,5 @@ header {
     }
   }
 
-  nav {
-    width: 400px;
-    overflow-y: scroll;
-    background-color: white;
-  }
+  // Mobile nav styles are overridden within the header block above.
 }

@@ -76,6 +76,10 @@ export const headerContent = {
       type: "dropdown",
       subnav: [
         {
+          title: "OSIS SMK KGB 2 Kota Bekasi",
+          to: "/",
+        },
+        {
           title: "Foto LDKS",
           to: "/",
         },

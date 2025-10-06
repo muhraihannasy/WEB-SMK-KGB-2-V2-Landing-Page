@@ -41,14 +41,26 @@ const Header = () => {
     };
   }, []);
 
+  // Lock body scroll when mobile navigation is open
+  useEffect(() => {
+    try {
+      document.body.style.overflow = isOpenNav ? "hidden" : "";
+    } catch (_) {}
+    return () => {
+      try {
+        document.body.style.overflow = "";
+      } catch (_) {}
+    };
+  }, [isOpenNav]);
+
   return (
     <header>
       <div className="row">
         <div className={scrollPosition >= 102 ? "header sticky" : "header"}>
-          <a href="" className="nav-logo">
+          <Link to="/" className="nav-logo">
             <img src={Logo} alt={headerContent.logo.alt} />
             <h2 className="title">{headerContent.logo.title}</h2>
-          </a>
+          </Link>
           <div className="btn-open-nav" onClick={() => setIsOpenNav(true)}>
             <VscListSelection />
           </div>
@@ -82,7 +94,9 @@ const Header = () => {
             {headerContent.navigation.map((item, index) => (
               <li className="nav-item" key={index}>
                 {item.type === "link" ? (
-                  <Link to={item.to}>{item.title}</Link>
+                  <Link to={item.to} onClick={() => setIsOpenNav(false)}>
+                    {item.title}
+                  </Link>
                 ) : (
                   <Dropdown title={item.title} subnav={item.subnav} />
                 )}

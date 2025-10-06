@@ -29,6 +29,7 @@ section.detail-blog {
 
     .blog-content {
       margin-top: 2em;
+      text-align: center;
 
       .blog-title {
         font-size: 2em;
@@ -41,57 +42,8 @@ section.detail-blog {
         border-radius: 10px;
         margin-bottom: 2em;
       }
-    }
-  }
-
-  .right {
-    margin-top: 4em;
-
-    .wrapper {
-      padding: 2em 2em;
-      border: 1px solid rgb(200, 200, 200);
-      border-radius: 1em;
-    }
-
-    .title {
-      font-weight: 600;
-      margin-bottom: 1.5em;
-    }
-
-    .recent-blogs {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1.8em;
-    }
-
-    .recent-blog-item {
-      padding-bottom: 1.7em;
-
-      &:nth-child(1),
-      &:nth-child(2) {
-        border-bottom: 1px solid rgb(169, 169, 169);
-      }
-
-      h3 {
-        font-weight: 600;
-      }
-
-      .recent-blog-cover {
-        width: 4em;
-        height: 4em;
-        border-radius: 50%;
-      }
-
-      .recent-blog-info {
-        display: flex;
-        align-items: center;
-        column-gap: 1em;
-        margin-bottom: 1em;
-      }
-
-      .recent-blog-info-detail h2 {
-        font-size: 1em;
-        font-weight: 500;
+      .blog-html {
+        text-align: center;
       }
     }
   }
@@ -100,17 +52,11 @@ section.detail-blog {
 @media (min-width: 1000px) {
   section.detail-blog {
     .row {
-      display: flex;
+      display: block;
     }
 
     .left {
-      width: 60%;
-    }
-
-    .right {
-      width: 40%;
-      padding-left: 5em;
-      margin-top: 0em;
+      width: 100%;
     }
   }
 }

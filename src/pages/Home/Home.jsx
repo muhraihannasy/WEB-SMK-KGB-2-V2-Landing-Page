@@ -50,11 +50,26 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetch(`${APIBASEURL}/blogs`);
+    //     const data = await response.json();
+    //     setArticles(data || []);
+    //   } catch (error) {
+    //     console.error("Error fetching articles:", error);
+    //     setArticles([]);
+    //   }
+    // };
+
     const fetchData = async () => {
       try {
-        const response = await fetch(`${APIBASEURL}/blogs`);
+        const response = await fetch(
+          `${APIBASEURL2}/cms/articles/list?limit=6`
+        );
         const data = await response.json();
-        setArticles(data || []);
+        const articles = data?.data?.data;
+
+        setArticles(articles || []);
       } catch (error) {
         console.error("Error fetching articles:", error);
         setArticles([]);
@@ -155,6 +170,17 @@ const Home = () => {
             <h2 className="subheading">{content?.blog_subheading || ""}</h2>
             <h3 className="heading">{content?.blog_heading || ""}</h3>
             <Blog items={articles} />
+            <div
+              style={{
+                marginTop: "1.5em",
+                textAlign: "center",
+                marginTop: "3em",
+              }}
+            >
+              <Button type="link" bg="secondary" to="/artikel">
+                Lihat banyak artikel
+              </Button>
+            </div>
           </div>
         </div>
       </section>
