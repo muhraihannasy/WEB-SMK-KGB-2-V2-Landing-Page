@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import "./Modal.scss";
 
 const PPDBModal = ({ isOpen, onClose }) => {
+  return;
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="ppdb-modal">

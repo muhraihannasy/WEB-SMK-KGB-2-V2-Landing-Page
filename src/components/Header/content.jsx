@@ -97,13 +97,13 @@ export const headerContent = {
       title: "Login",
       type: "link",
       bg: "secondary2",
-      to: "http://ppdb.smkkgb2.sch.id/register",
+      to: "https://app-v3.smkkgb2.sch.id/auth/login",
     },
     {
       title: "Daftar Sekarang",
       type: "link",
       bg: "outline-secondary",
-      to: "http://ppdb.smkkgb2.sch.id/register",
+      to: "https://app-v3.smkkgb2.sch.id/auth/register",
     },
   ],
 };
