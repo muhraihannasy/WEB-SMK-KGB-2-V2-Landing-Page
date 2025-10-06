@@ -13,8 +13,6 @@ import mikrotikGroup from "/assets/image/mikrotik-group.png"; // You'll need to 
 import "./Osis.scss";
 
 const Osis = () => {
-  const { heroBanner, headmaster, about, benefits } = mikrotikContent;
-  const [content, setContent] = useState({});
   const [articles, setArticles] = useState([]);
   const [articlesLoading, setArticlesLoading] = useState(true);
 
@@ -43,7 +41,6 @@ const Osis = () => {
         setArticles((prev) => [...prev, ...articles]);
       } catch (error) {
         console.error("Error fetching articles:", error);
-        setContent((prev) => ({ ...prev, articles: [] }));
       } finally {
         setArticlesLoading(false);
         setLoadingShowMore(false);
@@ -52,21 +49,6 @@ const Osis = () => {
 
     (async () => fetchArticles())();
   }, [currentPage]);
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const response = await fetch(`${APIBASEURL2}/cms/mikrotik-content`);
-        const data = await response.json();
-        setContent(data?.data || {});
-      } catch (error) {
-        console.error("Error fetching content:", error);
-        setContent({});
-      }
-    };
-
-    (async () => fetchContent())();
-  }, []);
 
   return (
     <>
