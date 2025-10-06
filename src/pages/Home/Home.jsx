@@ -41,6 +41,15 @@ const Home = () => {
   const [content, setContent] = useState({});
 
   useEffect(() => {
+    // Reset scroll position to top-left when visiting or changing article ID
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } catch (_) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${APIBASEURL}/blogs`);
