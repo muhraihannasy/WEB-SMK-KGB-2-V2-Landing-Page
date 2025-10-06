@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import HeroBanner from "../../components/Hero Banner/HeroBanner";
@@ -14,6 +15,11 @@ import "./Mikrotik.scss";
 const Mikrotik = () => {
   const { heroBanner, headmaster, about, benefits } = mikrotikContent;
   const [content, setContent] = useState({});
+  const [articles, setArticles] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  const truncate = (str = "", max = 100) =>
+    str.length > max ? str.slice(0, max) + "..." : str;
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -27,7 +33,23 @@ const Mikrotik = () => {
       }
     };
 
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch(
+          `${APIBASEURL2}/cms/articles/list?category_name=mikrotik`
+        );
+        const data = await response.json();
+        const articles = data?.data?.data;
+
+        setArticles(articles);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+        setContent((prev) => ({ ...prev, articles: [] }));
+      }
+    };
+
     (async () => fetchContent())();
+    (async () => fetchArticles())();
   }, []);
 
   return (
@@ -114,6 +136,52 @@ const Mikrotik = () => {
                 )
               )}
             </ul>
+
+            {Array.isArray(articles) && articles.length > 0 && (
+              <div className="mikrotik-articles">
+                <div className="section-header">
+                  <h3 className="heading">Artikel Mikrotik</h3>
+                </div>
+                <ul className="articles-grid">
+                  {articles.slice(0, visibleCount).map((item) => (
+                    <li key={item.id} className="article-card">
+                      <Link className="card-link" to={`/artikel-cms/${item.id}`}>
+                        <div className="cover">
+                          <img src={item.cover} alt={item.title} />
+                        </div>
+                        <div className="body">
+                          <h4 className="title">{truncate(item.title, 100)}</h4>
+                          <p className="excerpt">{item.excerpt}</p>
+                          {item.created_at && (
+                            <p className="meta">
+                              {new Date(item.created_at).toLocaleDateString(
+                                "id-ID",
+                                {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                                }
+                              )}
+                            </p>
+                          )}
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {visibleCount < (articles?.length || 0) && (
+                  <div className="show-more-wrapper">
+                    <button
+                      type="button"
+                      className="show-more"
+                      onClick={() => setVisibleCount((c) => c + 6)}
+                    >
+                      Tampilkan Lebih Banyak
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>
