@@ -11,7 +11,7 @@ function App() {
       element: <ArtikelDetailCMS />,
     },
     {
-      path: "/mikrotik-academny",
+      path: "/",
       element: <Mikrotik />,
     },
   ]);

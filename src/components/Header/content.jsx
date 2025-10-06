@@ -21,22 +21,22 @@ export const headerContent = {
   navigation: [
     {
       title: "Beranda",
-      to: "/",
+      to: "https://smkkgb2.sch.id",
       type: "link",
     },
     {
       title: "Profile Sekolah",
-      to: "/profile-sekolah",
+      to: "https://smkkgb2.sch.id/profile-sekolah",
       type: "link",
     },
     {
       title: "PPDB",
-      to: "http://ppdb.smkkgb2.sch.id/",
+      to: "https://app-v3.smkkgb2.sch.id/auth/register",
       type: "link",
     },
     {
       title: "Artikel",
-      to: "/artikel",
+      to: "https://smkkgb2.sch.id/artikel",
       type: "link",
     },
     {
@@ -67,7 +67,7 @@ export const headerContent = {
         },
         {
           title: "Mitra Industri",
-          to: "/mitra-industri",
+          to: "https://smkkgb2.sch.id/mitra-industri",
         },
       ],
     },
@@ -87,7 +87,7 @@ export const headerContent = {
     },
     {
       title: "Mikrotik Academny",
-      to: "/mikrotik-academny",
+      to: "/",
       type: "link",
     },
   ],
