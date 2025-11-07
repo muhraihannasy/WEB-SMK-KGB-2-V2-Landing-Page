@@ -44,6 +44,7 @@ const ProfileSchool = () => {
       <HeroBanner
         title={content?.hero_title || heroBanner.title}
         currentPage={content?.hero_current_page || heroBanner.currentPage}
+        url={content?.hero_image}
       />
 
       <section className="profile-about">
