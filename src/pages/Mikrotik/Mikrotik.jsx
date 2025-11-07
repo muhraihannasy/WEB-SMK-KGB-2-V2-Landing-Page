@@ -66,8 +66,6 @@ const Mikrotik = () => {
     (async () => fetchContent())();
   }, []);
 
-  console.log(content, "Asdsad");
-
   return (
     <>
       <Header />
