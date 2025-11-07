@@ -23,9 +23,6 @@ const Mikrotik = () => {
   const [isShowMore, setIsShowMore] = useState(false);
   const [loadingShowMore, setLoadingShowMore] = useState(false);
 
-  const truncate = (str = "", max = 100) =>
-    str.length > max ? str.slice(0, max) + "..." : str;
-
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -69,6 +66,8 @@ const Mikrotik = () => {
     (async () => fetchContent())();
   }, []);
 
+  console.log(content, "Asdsad");
+
   return (
     <>
       <Header />
@@ -76,6 +75,7 @@ const Mikrotik = () => {
       <HeroBanner
         title={content?.hero_title || heroBanner.title}
         currentPage={content?.hero_current_page || heroBanner.currentPage}
+        url={content?.hero_image}
       />
 
       <section className="mikrotik-headmaster">
