@@ -6,10 +6,13 @@ const HeroBanner = ({ title, currentPage, url }) => {
     <section
       className="hero-banner"
       style={{
-        background: `url(${url})`,
+        backgroundImage: `url(${url})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        width: "100%",
+        height: "35em",
+        objectFit: "cover", // kalau pakai <img> bisa diganti ke sini
       }}
     >
       <div className="container">
