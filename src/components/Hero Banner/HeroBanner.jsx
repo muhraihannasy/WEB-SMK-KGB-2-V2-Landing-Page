@@ -9,7 +9,7 @@ const HeroBanner = ({ title, currentPage, url }) => {
         backgroundImage: `url(${url})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: "top",
         width: "100%",
         height: "35em",
         objectFit: "cover", // kalau pakai <img> bisa diganti ke sini

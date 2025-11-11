@@ -35,25 +35,30 @@ section.hero-banner {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40em;
-      padding: 1.5em 1em;
+      width: 100%; // biar otomatis ngikut lebar layar
+      max-width: 40em; // tetap ada batas maksimal di layar besar
+      padding: 1em;
       background-color: $primaryColor;
       border-top-left-radius: 1em;
       border-top-right-radius: 1em;
-      gap: 2em;
+      gap: 1em;
+      flex-wrap: wrap; // biar isi nggak overflow
+      text-align: center;
+      left: 50%;
+      transform: translateX(-50%); // biar selalu center di parent
 
       .circle {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 1.5em;
-        height: 1.5em;
+        width: 1.2em;
+        height: 1.2em;
         border: 1.5px solid $white;
         border-radius: 50%;
 
         .dot {
-          width: 0.5em;
-          height: 0.5em;
+          width: 0.4em;
+          height: 0.4em;
           background-color: $white;
           border-radius: 50%;
         }
@@ -61,10 +66,24 @@ section.hero-banner {
 
       a {
         color: $white;
+        font-size: 0.9em; // sedikit kecil di mobile
       }
 
       a.active {
         text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        padding: 0.8em;
+        gap: 0.5em;
+        font-size: 0.85em;
+      }
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 0.3em;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
       }
     }
   }
